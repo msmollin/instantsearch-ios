@@ -36,7 +36,8 @@ let package = Package(
   targets: [
     .target(
       name: "InstantSearchInsights",
-      dependencies: ["AlgoliaSearchClient"]),
+      dependencies: ["AlgoliaSearchClient"],
+      exclude: ["README.md"]),
     .testTarget(
       name: "InstantSearchInsightsTests",
       dependencies: ["InstantSearchInsights", "AlgoliaSearchClient"]),
