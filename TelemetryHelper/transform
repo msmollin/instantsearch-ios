@@ -1,0 +1,8 @@
+#!/bin/bash
+
+IFS=$'\n'       # make newlines the only separator
+set -f          # disable globbing
+for i in $(cat < "$1"); do
+    output=$(echo $i | sed -E 's/, .+telemetryiOS\((.+)\)/\1/')
+    eval "tmhelper transform $output"
+done
