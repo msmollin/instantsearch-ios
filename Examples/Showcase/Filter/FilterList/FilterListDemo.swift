@@ -31,7 +31,7 @@ struct FilterListDemo {
       .init(attribute: "price", operator: .greaterThan, value: 100)
     ]
 
-    return FilterListDemoViewController(items: numericFilters, selectionMode: .single)
+    return FilterListDemoViewController(items: numericFilters, selectionMode: .multiple)
 
   }
 

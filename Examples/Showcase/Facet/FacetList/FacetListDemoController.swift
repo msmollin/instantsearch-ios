@@ -50,6 +50,7 @@ class FacetListDemoController {
                                operator: .and,
                                controller: promotionController,
                                presenter: promotionPresenter)
+      
 
     // Category
     let categoryRefinementListPresenter = FacetListPresenter(sortBy: [.count(order: .descending), .alphabetical(order: .ascending)], showEmptyFacets: false)

@@ -17,6 +17,7 @@ struct ContentView: View {
   @ObservedObject var hitsController: HitsObservableController<Item>
   @ObservedObject var statsController: StatsTextObservableController
   @ObservedObject var facetListController: FacetListObservableController
+  @ObservedObject var categoryFacetListController: FacetListObservableController
 
   @State private var isEditing = false
   @State private var isPresentingFacets = false
@@ -50,18 +51,33 @@ struct ContentView: View {
   private func facets() -> some View {
     NavigationView {
       ScrollView {
-        FacetList(facetListController) { facet, isSelected in
-          VStack {
-            FacetRow(facet: facet, isSelected: isSelected)
-              .padding()
-            Divider()
+          Section(header: Text("Categories").font(.headline)) {
+              FacetList(categoryFacetListController) { facet, isSelected in
+                VStack {
+                  FacetRow(facet: facet, isSelected: isSelected)
+                    .padding()
+                  Divider()
+                }
+              } noResults: {
+                Text("No facet found")
+                  .frame(maxWidth: .infinity, maxHeight: .infinity)
+              }
           }
-        } noResults: {
-          Text("No facet found")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
+
+          Section(header: Text("Manufacturer").font(.headline)) {
+              FacetList(facetListController) { facet, isSelected in
+                VStack {
+                  FacetRow(facet: facet, isSelected: isSelected)
+                    .padding()
+                  Divider()
+                }
+              } noResults: {
+                Text("No facet found")
+                  .frame(maxWidth: .infinity, maxHeight: .infinity)
+              }
+          }
       }
-      .navigationBarTitle("Brand")
+      .navigationBarTitle("Facet lists")
     }
   }
 

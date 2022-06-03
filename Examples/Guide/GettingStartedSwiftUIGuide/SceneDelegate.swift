@@ -16,7 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let rootView = ContentView(searchBoxController: controller.searchBoxController,
                                hitsController: controller.hitsController,
                                statsController: controller.statsController,
-                               facetListController: controller.facetListController)
+                               facetListController: controller.facetListController,
+                               categoryFacetListController: controller.categoryFacetListController)
     let viewController = CommonSwiftUIDemoViewController(controller: controller,
                                                          rootView: rootView)
     setMain(viewController, for: scene)
