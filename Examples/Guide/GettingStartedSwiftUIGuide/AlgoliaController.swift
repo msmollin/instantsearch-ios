@@ -28,7 +28,7 @@ class AlgoliaController {
   let facetListInteractor: FacetListInteractor
   let facetListController: FacetListObservableController
     
-  let categoryFacetListInteractor: FacetListInteractor
+  let categoryFacetListConnector: FacetListConnector
   let categoryFacetListController: FacetListObservableController
 
   init() {
@@ -44,7 +44,10 @@ class AlgoliaController {
     self.filterState = .init()
     self.facetListInteractor = .init()
     self.facetListController = .init()
-    self.categoryFacetListInteractor = .init()
+    self.categoryFacetListConnector = .init(searcher: searcher,
+                                            filterState: filterState,
+                                            attribute: "category",
+                                            operator: .or)
     self.categoryFacetListController = .init()
     setupConnections()
     searcher.search()
@@ -61,9 +64,7 @@ class AlgoliaController {
     facetListInteractor.connectSearcher(searcher, with: "manufacturer")
     facetListInteractor.connectFilterState(filterState, with: "manufacturer", operator: .or)
     facetListInteractor.connectController(facetListController, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
-    categoryFacetListInteractor.connectSearcher(searcher, with: "category")
-    categoryFacetListInteractor.connectFilterState(filterState, with: "category", operator: .or)
-    categoryFacetListInteractor.connectController(categoryFacetListController, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
+    categoryFacetListConnector.connectController(categoryFacetListController, with: FacetListPresenter(sortBy: [.isRefined, .count(order: .descending)]))
   }
 
 }
